@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('myStage'){
+    stage('Build'){
       steps {
-        sh 'ls -la' 
+        sh '/var/lib/jenkins/tools/hudson.plugins.gradle.GradleInstallation/gradleversion/bin/gradle --scan -s build' 
       }
     }
     stage('Build') {
