@@ -1,1 +1,1 @@
-# Spring Bootback-end application for web, android and desktop BeatHub UIs.
+# Back-end Spring Boot app for WEB, Android and Flutter desktop BeatHub apps.
