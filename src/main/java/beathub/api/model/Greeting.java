@@ -1,10 +1,10 @@
-package xyz.beathub.api;
+package beathub.api.model;
 
 public class Greeting {
 
     private final long id;
     private final String content;
-//test
+
     public Greeting(long id, String content) {
         this.id = id;
         this.content = content;
