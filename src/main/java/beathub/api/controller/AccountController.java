@@ -1,5 +1,7 @@
-package xyz.beathub.api.controller;
+package beathub.api.controller;
 
+import beathub.api.model.Account;
+import beathub.api.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,35 +10,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.beathub.api.model.User;
-import xyz.beathub.api.service.UserService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/accounts")
+public class AccountController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private final UserService userService;
+    private final AccountService accountService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping()
-    public ResponseEntity<Object> getUsers() {
-        List<User> users;
+    public ResponseEntity<Object> getAccounts() {
+        List<Account> accounts;
         log.info("[START] Get all users");
         try {
-            users = userService.getUsers();
+            accounts = accountService.getUsers();
         } catch (Exception e) {
             log.error("[ERROR] Get all users with error ", e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         log.info("[STOP] Get all users");
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(accounts);
     }
 
 }

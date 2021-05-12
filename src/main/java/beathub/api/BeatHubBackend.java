@@ -1,4 +1,4 @@
-package xyz.beathub.api;
+package beathub.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

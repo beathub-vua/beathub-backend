@@ -2,9 +2,9 @@ spring:
   datasource:
     hikari:
       driver-class-name: org.postgresql.Driver
-      jdbc-url: jdbc:postgresql://privateip1337.lets.ee:5432/BeatHub?currentSchema=BeatHub
+      jdbc-url: jdbc:postgresql://privateip1337.lets.ee:5432/BeatHub?currentSchema=public
       username: postgres
       password: 30ajOfYTatWY3izuPbDd
   sql:
-    get_user:
-      SELECT * FROM User
+    get_accounts:
+      select * from account;

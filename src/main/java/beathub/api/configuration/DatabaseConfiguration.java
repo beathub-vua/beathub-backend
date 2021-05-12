@@ -1,4 +1,4 @@
-package xyz.beathub.api.configuration;
+package beathub.api.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;

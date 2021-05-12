@@ -1,15 +1,16 @@
-package xyz.beathub.api.model;
+package beathub.api.model;
 
-public class User {
+public class Account {
 
     private int id;
     private String firstName;
     private String lastName;
 
-    public User() {
+    public Account() {
     }
 
-    public User(String firstName, String lastName) {
+    public Account(int id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
