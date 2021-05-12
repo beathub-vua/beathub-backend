@@ -2,9 +2,6 @@ pipeline {
   agent any
   stages {
     stage('Build'){
-      when {
-            expression { env.BRANCH_NAME == 'master' }
-            }
       steps {
         sh '/var/lib/jenkins/tools/hudson.plugins.gradle.GradleInstallation/gradleversion/bin/gradle --scan -s build' 
       }
