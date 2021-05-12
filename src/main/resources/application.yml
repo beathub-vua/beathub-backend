@@ -1,1 +1,7 @@
-
+spring:
+  datasource:
+    hikari:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://privateip1337.lets.ee:5432/BeatHub?currentSchema=BeatHub
+      username: postgres
+      password: 30ajOfYTatWY3izuPbDd
