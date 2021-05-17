@@ -5,6 +5,13 @@ spring:
       jdbc-url: jdbc:postgresql://privateip1337.lets.ee:5432/BeatHub?currentSchema=public
       username: postgres
       password: 30ajOfYTatWY3izuPbDd
+      maximum-pool-size: 5
   sql:
     get_accounts:
       select * from account;
+    get_accountId_by_username:
+      select id from account where username = ?;
+    get_accountId_by_email:
+      select id from account where email = ?;
+    register_account:
+      insert into account (username, password, email, date_created) values (?, ?, ?, ?);
