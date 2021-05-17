@@ -6,16 +6,16 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class BeatHubBackend extends SpringBootServletInitializer {
+public class BeatHubApi extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(BeatHubBackend.class, args);
+        SpringApplication.run(BeatHubApi.class, args);
     }
 
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(BeatHubBackend.class);
+        return builder.sources(BeatHubApi.class);
     }
 
 }
