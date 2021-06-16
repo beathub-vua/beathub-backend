@@ -1,10 +1,12 @@
 package beathub.api.controller;
 
+import beathub.api.annotation.ShowAPI;
 import beathub.api.exception.DuplicateEmailException;
 import beathub.api.exception.InvalidEmailException;
 import beathub.api.exception.DuplicateUsernameException;
 import beathub.api.model.Account;
 import beathub.api.service.AccountService;
+import io.swagger.annotations.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/accounts")
+@ShowAPI
 public class AccountController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     private final AccountService accountService;
 
     @Autowired
@@ -32,6 +36,7 @@ public class AccountController {
     }
 
     @GetMapping()
+    @ApiResponse(code = 200, message = "OK", responseContainer = "List", response = Account.class)
     public ResponseEntity<Object> getAccounts() {
         List<Account> accounts;
         log.info("[START] Get all accounts");

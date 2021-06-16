@@ -18,3 +18,9 @@ spring:
       select id from account where email = ?;
     register_account:
       insert into account (username, password, email, date_created) values (?, ?, ?, ?);
+# HotFix for displaying response examples when controller method returns ResponseEntity<Object>: https://github.com/springfox/springfox/issues/3503
+springfox:
+  documentation:
+    swagger:
+      use-model-v3: false
+# End of hotfix
