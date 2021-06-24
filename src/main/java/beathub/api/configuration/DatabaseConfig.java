@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-public class DatabaseConfiguration {
+public class DatabaseConfig {
 
     @Bean
     @ConfigurationProperties(prefix="spring.datasource.hikari")

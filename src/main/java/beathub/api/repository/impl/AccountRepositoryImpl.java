@@ -18,12 +18,14 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Value("${spring.sql.get_accounts}")
     private String getAccountsSql;
-    @Value("${spring.sql.get_accountId_by_username}")
+    @Value("${spring.sql.get_account_by_username}")
     private String getAccountByUsernameSql;
+    @Value("${spring.sql.get_accountId_by_username}")
+    private String getAccountIdByUsernameSql;
     @Value("${spring.sql.get_accountId_by_email}")
-    private String getAccountByEmailSql;
-    @Value("${spring.sql.register_account}")
-    private String registerAccountSql;
+    private String getAccountIdByEmailSql;
+    @Value("${spring.sql.register_user}")
+    private String registerUserSql;
 
     private final JdbcTemplate template;
     private final RowMapper<Account> accountRowMapper;
@@ -41,20 +43,25 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Integer getAccountIdByUsername(String username) {
-        return template.queryForObject(getAccountByUsernameSql, Integer.class, username);
+        return template.queryForObject(getAccountIdByUsernameSql, Integer.class, username);
     }
 
     @Override
     public Integer getAccountIdByEmail(String email) {
-        return template.queryForObject(getAccountByEmailSql, Integer.class, email);
+        return template.queryForObject(getAccountIdByEmailSql, Integer.class, email);
     }
 
     @Override
-    public void registerAccount(Account account) {
-        template.update(registerAccountSql,
+    public void registerUser(Account account) {
+        template.update(registerUserSql,
                 account.getUsername(),
                 account.getPassword(),
                 account.getEmail(),
                 Timestamp.from(Instant.now()));
+    }
+
+    @Override
+    public List<Account> loadAccountByUsername(String username) {
+        return template.query(getAccountByUsernameSql, accountRowMapper, username);
     }
 }

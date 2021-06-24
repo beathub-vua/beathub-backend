@@ -1,6 +1,7 @@
-package beathub.api.configuration;
+package beathub.api.util;
 
 import beathub.api.model.Account;
+import beathub.api.security.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,10 +26,12 @@ public class ApiUtil {
     @Bean(name = "account")
     public RowMapper<Account> getAccountRowMapper() {
         return (rs, rowNum) -> new Account(
-                rs.getInt("id"),
+                rs.getLong("id"),
                 rs.getString("username"),
                 rs.getString("password"),
                 rs.getString("email"),
-                rs.getTimestamp("date_created"));
+                rs.getTimestamp("date_created"),
+                Role.values()[rs.getInt("role")]
+        );
     }
 }

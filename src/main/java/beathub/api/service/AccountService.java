@@ -10,14 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 @Service
-public class AccountService {
+public class AccountService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -34,31 +35,36 @@ public class AccountService {
         return repository.getAccounts();
     }
 
-    @Transactional
     public void registerAccount(Account account) {
         checkEmail(account.getEmail());
         checkUsername(account.getUsername());
-        repository.registerAccount(account);
+        repository.registerUser(account);
+    }
+
+    @Override
+    public Account loadUserByUsername(String username) {
+        List<Account> accounts = repository.loadAccountByUsername(username);
+
+        if (accounts.isEmpty()) {
+            log.debug("Query returned no results for user '" + username + "'");
+            throw new UsernameNotFoundException("Username " + username + " not found!");
+        }
+        return accounts.get(0);
     }
 
     private void checkEmail(String email) {
-        try {
-            repository.getAccountIdByEmail(email);
-            throw new DuplicateEmailException();
-        } catch (IncorrectResultSizeDataAccessException e) {
-            log.info("Email: {} is not used", email);
+        if (repository.getAccountIdByEmail(email) != null) {
+            throw new DuplicateUsernameException();
         }
+
         if (!emailPredicate.test(email)) {
             throw new InvalidEmailException();
         }
     }
 
     private void checkUsername(String username) {
-        try {
-            repository.getAccountIdByUsername(username);
+        if (repository.getAccountIdByUsername(username) != null) {
             throw new DuplicateUsernameException();
-        } catch (IncorrectResultSizeDataAccessException e) {
-            log.info("Username: {} is not used", username);
         }
     }
 }

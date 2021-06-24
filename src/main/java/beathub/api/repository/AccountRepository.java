@@ -13,5 +13,7 @@ public interface AccountRepository {
 
     Integer getAccountIdByEmail(String email);
 
-    void registerAccount(Account account);
+    void registerUser(Account account);
+
+    List<Account> loadAccountByUsername(String username);
 }
