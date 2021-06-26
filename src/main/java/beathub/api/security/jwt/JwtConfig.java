@@ -1,4 +1,4 @@
-package beathub.api.jwt;
+package beathub.api.security.jwt;
 
 import io.jsonwebtoken.security.Keys;
 import org.springframework.boot.context.properties.ConfigurationProperties;

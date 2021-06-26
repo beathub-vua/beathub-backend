@@ -5,6 +5,7 @@ import beathub.api.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -42,13 +43,23 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Integer getAccountIdByUsername(String username) {
-        return template.queryForObject(getAccountIdByUsernameSql, Integer.class, username);
+    public Boolean checkIfUsernameIsTaken(String username) {
+        try {
+            template.queryForObject(getAccountIdByUsernameSql, Integer.class, username);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public Integer getAccountIdByEmail(String email) {
-        return template.queryForObject(getAccountIdByEmailSql, Integer.class, email);
+    public Boolean checkIfEmailIsTaken(String email) {
+        try {
+            template.queryForObject(getAccountIdByEmailSql, Integer.class, email);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

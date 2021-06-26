@@ -1,4 +1,4 @@
-package beathub.api.jwt;
+package beathub.api.security.jwt;
 
 import beathub.api.model.dto.LoginDto;
 import com.fasterxml.jackson.databind.ObjectMapper;

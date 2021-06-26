@@ -1,4 +1,4 @@
-package beathub.api.jwt;
+package beathub.api.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +35,7 @@ public class JwtVerifier extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(jwtConfig.getAuthorizationHeader());
         if (Strings.isBlank(authorizationHeader) || !authorizationHeader.startsWith(jwtConfig.getTokenPrefix())) {
             filterChain.doFilter(request, response);

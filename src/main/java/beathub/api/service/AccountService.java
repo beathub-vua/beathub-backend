@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +24,13 @@ public class AccountService implements UserDetailsService {
 
     private final AccountRepositoryImpl repository;
     private final Predicate<String> emailPredicate;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AccountService(AccountRepositoryImpl repository, @Qualifier("email") Predicate<String> emailPredicate) {
+    public AccountService(AccountRepositoryImpl repository, @Qualifier("email") Predicate<String> emailPredicate, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.emailPredicate = emailPredicate;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<Account> getAccounts() {
@@ -38,6 +40,7 @@ public class AccountService implements UserDetailsService {
     public void registerAccount(Account account) {
         checkEmail(account.getEmail());
         checkUsername(account.getUsername());
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
         repository.registerUser(account);
     }
 
@@ -53,8 +56,8 @@ public class AccountService implements UserDetailsService {
     }
 
     private void checkEmail(String email) {
-        if (repository.getAccountIdByEmail(email) != null) {
-            throw new DuplicateUsernameException();
+        if (repository.checkIfEmailIsTaken(email)) {
+            throw new DuplicateEmailException();
         }
 
         if (!emailPredicate.test(email)) {
@@ -63,7 +66,7 @@ public class AccountService implements UserDetailsService {
     }
 
     private void checkUsername(String username) {
-        if (repository.getAccountIdByUsername(username) != null) {
+        if (repository.checkIfUsernameIsTaken(username)) {
             throw new DuplicateUsernameException();
         }
     }

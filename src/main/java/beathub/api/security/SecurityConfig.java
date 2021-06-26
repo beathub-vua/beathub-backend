@@ -1,8 +1,8 @@
 package beathub.api.security;
 
-import beathub.api.jwt.JwtConfig;
-import beathub.api.jwt.JwtUsernameAndPasswordAuthenticationFilter;
-import beathub.api.jwt.JwtVerifier;
+import beathub.api.security.jwt.JwtConfig;
+import beathub.api.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
+import beathub.api.security.jwt.JwtVerifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,18 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
 
     private static final String[] AUTH_WHITELIST = {
             // -- Swagger UI v2
@@ -44,11 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService accountService;
     private final JwtConfig jwtConfig;
+    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
-    public SecurityConfig(UserDetailsService accountService, JwtConfig jwtConfig) {
+    public SecurityConfig(UserDetailsService accountService, JwtConfig jwtConfig, PasswordEncoder passwordEncoder) {
         this.accountService = accountService;
         this.jwtConfig = jwtConfig;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -75,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(accountService);
         return provider;
     }
