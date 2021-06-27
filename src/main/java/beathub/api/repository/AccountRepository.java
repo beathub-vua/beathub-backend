@@ -9,9 +9,11 @@ import java.util.List;
 public interface AccountRepository {
     List<Account> getAccounts();
 
-    Integer getAccountIdByUsername(String username);
+    Boolean checkIfUsernameIsTaken(String username);
 
-    Integer getAccountIdByEmail(String email);
+    Boolean checkIfEmailIsTaken(String email);
 
-    void registerAccount(Account account);
+    void registerUser(Account account);
+
+    List<Account> loadAccountByUsername(String username);
 }

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    hikari:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/BeatHubLocal?currentSchema=public
+      username: postgres
+      password: Gkk09OctELZ6gMcRNULc
+      maximum-pool-size: 5

@@ -2,8 +2,8 @@ package beathub.api.controller;
 
 import beathub.api.annotation.ShowAPI;
 import beathub.api.exception.DuplicateEmailException;
-import beathub.api.exception.InvalidEmailException;
 import beathub.api.exception.DuplicateUsernameException;
+import beathub.api.exception.InvalidEmailException;
 import beathub.api.model.Account;
 import beathub.api.service.AccountService;
 import io.swagger.annotations.ApiResponse;
@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class AccountController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @ApiResponse(code = 200, message = "OK", responseContainer = "List", response = Account.class)
     public ResponseEntity<Object> getAccounts() {
         List<Account> accounts;
@@ -51,27 +53,28 @@ public class AccountController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Object> register(@RequestBody Account account) {
         log.info("[START] Register account: {}", account.getUsername());
         try {
             accountService.registerAccount(account);
         } catch (InvalidEmailException e) {
-            log.error("[ERROR] Register account: {} with error: InvalidEmailException: {}",
+            log.warn("Register account: {} with error: InvalidEmailException: {}",
                     account.getUsername(), account.getEmail());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (DuplicateEmailException e) {
-            log.error("[ERROR] Register account: {} with error: DuplicateEmailException: {}",
+            log.warn("Register account: {} with error: DuplicateEmailException: {}",
                     account.getUsername(), account.getEmail());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (DuplicateUsernameException e) {
-            log.error("[ERROR] Register account with error: DuplicateUsernameException: {}", account.getUsername());
+            log.warn("Register account with error: DuplicateUsernameException: {}", account.getUsername());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (DataAccessException e) {
-            log.error("[ERROR] Register account: {} with error: {}", account.getUsername(), e);
+            log.error("Register account: {} with error: {}", account.getUsername(), e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         log.info("[STOP] Successfully registered account: {}", account.getUsername());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Successfully created an account!");
     }
 
 }

@@ -1,6 +1,7 @@
 server:
   servlet:
     context-path: /beathub
+
 spring:
   datasource:
     hikari:
@@ -12,15 +13,27 @@ spring:
   sql:
     get_accounts:
       select * from account;
+    get_account_by_username:
+      select * from account where username = ?;
     get_accountId_by_username:
       select id from account where username = ?;
     get_accountId_by_email:
       select id from account where email = ?;
-    register_account:
+    register_user:
       insert into account (username, password, email, date_created) values (?, ?, ?, ?);
-# HotFix for displaying response examples when controller method returns ResponseEntity<Object>: https://github.com/springfox/springfox/issues/3503
+  redis:
+    host: localhost
+    port: 6379
+
+# HotFix for displaying response examples when controller method returns ResponseEntity<Object>:
+# https://github.com/springfox/springfox/issues/3503
 springfox:
   documentation:
     swagger:
       use-model-v3: false
 # End of hotfix
+
+jwt:
+  secretKey: 'aervyragfdberyerynrkafiijjgi747gcwecfqwqwrpjio[346357347achuASUfhfJQW-DKCdsgsdgsdgsdgsdgdsenurtuy WRQTBY o;,y8'
+  tokenPrefix: 'Bearer '
+  tokenExpirationAfterDay: 14
