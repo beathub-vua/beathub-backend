@@ -53,7 +53,6 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Object> register(@RequestBody Account account) {
         log.info("[START] Register account: {}", account.getUsername());
         try {
