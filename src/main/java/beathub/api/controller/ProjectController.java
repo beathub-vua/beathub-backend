@@ -27,10 +27,10 @@ public class ProjectController {
                 logger.info(new String(file.getBytes()));
             } catch (IOException e) {
                 e.printStackTrace();
-                return ResponseEntity.ok().build();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully received file!");
     }
 
 }
