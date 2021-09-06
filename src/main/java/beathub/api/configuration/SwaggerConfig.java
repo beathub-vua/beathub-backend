@@ -32,7 +32,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "BeatHub REST API",
-                "Backend REST API for BeatHub Web, Android and Desktop Flutter apps.",
+                "Backend REST API for BeatHub Android and Desktop Flutter apps.",
                 "1.0",
                 "Terms of service",
                 new Contact("Marin Bareza", "https://github.com/MarinBareza", "mbareza@racunarstvo.hr"),
