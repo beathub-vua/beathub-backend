@@ -21,7 +21,7 @@ public class ProjectController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @PostMapping("/new")
-    public ResponseEntity<Object> register(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Object> newProject(@RequestParam("file") MultipartFile file) {
         if (file != null) {
             try {
                 logger.info(new String(file.getBytes()));
