@@ -70,4 +70,8 @@ public class AccountService implements UserDetailsService {
             throw new DuplicateUsernameException();
         }
     }
+
+    public boolean deleteAccount(Long accountId) {
+        return repository.deleteAccount(accountId) == 1;
+    }
 }

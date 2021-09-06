@@ -25,8 +25,10 @@ public class AccountRepositoryImpl implements AccountRepository {
     private String getAccountIdByUsernameSql;
     @Value("${spring.sql.get_accountId_by_email}")
     private String getAccountIdByEmailSql;
-    @Value("${spring.sql.register_user}")
+    @Value("${spring.sql.register_account}")
     private String registerUserSql;
+    @Value("${spring.sql.delete_account}")
+    private String deleteAccountSql;
 
     private final JdbcTemplate template;
     private final RowMapper<Account> accountRowMapper;
@@ -74,5 +76,10 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public List<Account> loadAccountByUsername(String username) {
         return template.query(getAccountByUsernameSql, accountRowMapper, username);
+    }
+
+    @Override
+    public int deleteAccount(Long accountId) {
+        return template.update(deleteAccountSql, accountId);
     }
 }

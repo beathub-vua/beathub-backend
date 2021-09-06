@@ -14,7 +14,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,6 +76,21 @@ public class AccountController {
         }
         log.info("[STOP] Successfully registered account: {}", account.getUsername());
         return ResponseEntity.ok().body("Successfully created an account!");
+    }
+
+    @DeleteMapping("/{accountId}")
+    public ResponseEntity<Object> delete(@PathVariable Long accountId) {
+        log.info("[START] Delete account by id {}", accountId);
+        try {
+            if (!accountService.deleteAccount(accountId)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No account with id " + accountId + "!");
+            }
+        } catch (DataAccessException e) {
+            log.warn("[ERROR] Delete account by id {} with message: {}", accountId, e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("[STOP] Delete account by id {}", accountId);
+        return ResponseEntity.ok().body("Successfully deleted account with id " + accountId);
     }
 
 }

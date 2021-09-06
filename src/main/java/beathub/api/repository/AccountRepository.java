@@ -16,4 +16,6 @@ public interface AccountRepository {
     void registerUser(Account account);
 
     List<Account> loadAccountByUsername(String username);
+
+    int deleteAccount(Long accountId);
 }

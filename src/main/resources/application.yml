@@ -19,8 +19,10 @@ spring:
       select id from account where username = ?;
     get_accountId_by_email:
       select id from account where email = ?;
-    register_user:
+    register_account:
       insert into account (username, password, email, date_created) values (?, ?, ?, ?);
+    delete_account:
+      delete from account where id = ?;
   redis:
     host: localhost
     port: 6379
