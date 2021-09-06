@@ -21,16 +21,17 @@ public class ProjectController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @PostMapping("/new")
-    public ResponseEntity<Object> newProject(@RequestParam("file") MultipartFile file) {
-        if (file != null) {
+    public ResponseEntity<Object> newProject(@RequestParam("file") MultipartFile file, @RequestParam("json") String json) {
+        if (file != null && json != null) {
             try {
                 logger.info(new String(file.getBytes()));
+                logger.info(json);
             } catch (IOException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Successfully received file!");
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully received file and json!");
     }
 
 }
