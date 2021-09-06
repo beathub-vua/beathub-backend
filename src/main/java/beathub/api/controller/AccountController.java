@@ -27,7 +27,7 @@ import java.util.List;
 @ShowAPI
 public class AccountController {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final AccountService accountService;
 
