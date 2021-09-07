@@ -68,6 +68,7 @@ public class ProjectController {
             logger.error("[ERROR] Get projects by account id {} with message {}", accountId, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+        logger.info("[STOP] Get projects by account id {}", accountId);
         return ResponseEntity.status(HttpStatus.OK).body(projectList);
     }
 
