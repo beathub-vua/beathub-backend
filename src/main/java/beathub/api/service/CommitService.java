@@ -20,4 +20,8 @@ public class CommitService {
     public List<Commit> getCommitsByProjectId(Long projectId) {
         return repository.getCommitsByProjectId(projectId);
     }
+
+    public Commit getCommitById(Long commitId) {
+        return repository.getCommitsById(commitId);
+    }
 }

@@ -15,6 +15,8 @@ public class CommitRepositoryImpl implements CommitRepository {
 
     @Value("${spring.sql.commit.get_commits_by_project_id}")
     private String getCommitsByProjectIdSql;
+    @Value("${spring.sql.commit.get_commit_by_id}")
+    private String getCommitByIdSql;
 
     private final JdbcTemplate template;
     private final RowMapper<Commit> commitRowMapper;
@@ -28,5 +30,10 @@ public class CommitRepositoryImpl implements CommitRepository {
     @Override
     public List<Commit> getCommitsByProjectId(Long projectId) {
         return template.query(getCommitsByProjectIdSql, commitRowMapper, projectId);
+    }
+
+    @Override
+    public Commit getCommitsById(Long commitId) {
+        return template.queryForObject(getCommitByIdSql, commitRowMapper, commitId);
     }
 }
