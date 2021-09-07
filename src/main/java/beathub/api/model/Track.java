@@ -3,12 +3,28 @@ package beathub.api.model;
 import java.util.List;
 
 public class Track {
+    private Long id;
     private String trackName;
     private int trackRouteId;
     private int channels;
     private Playlist playlist;
     private List<AudioSource> audioFiles;
     private List<Plugin> plugins;
+
+    public Track(Long id, String trackName, int trackRouteId, int channels) {
+        this.id = id;
+        this.trackName = trackName;
+        this.trackRouteId = trackRouteId;
+        this.channels = channels;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTrackName() {
         return trackName;

@@ -2,7 +2,9 @@ package beathub.api.configuration;
 
 import beathub.api.model.Account;
 import beathub.api.model.Commit;
+import beathub.api.model.Plugin;
 import beathub.api.model.Project;
+import beathub.api.model.Track;
 import beathub.api.security.Role;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -57,6 +59,24 @@ public class DatabaseConfig {
                 rs.getBoolean("is_current"),
                 rs.getString("file_path"),
                 rs.getTimestamp("date_created")
+        );
+    }
+
+    @Bean()
+    public RowMapper<Track> getTrackRowMapper() {
+        return (rs, rowNum) -> new Track(
+                rs.getLong("id"),
+                rs.getString("track_name"),
+                rs.getInt("track_route_id"),
+                rs.getInt("channels")
+        );
+    }
+
+    @Bean()
+    public RowMapper<Plugin> getPluginRowMapper() {
+        return (rs, rowNum) -> new Plugin(
+                rs.getLong("id"),
+                rs.getString("name")
         );
     }
 

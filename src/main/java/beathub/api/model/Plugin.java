@@ -3,17 +3,22 @@ package beathub.api.model;
 import java.util.List;
 
 public class Plugin {
-    private int id;
+    private Long id;
     private String uniqueId;
     private int routeId;
     private String name;
     private List<VstParameter> parameters;
 
-    public int getId() {
+    public Plugin(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

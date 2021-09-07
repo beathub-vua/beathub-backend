@@ -39,10 +39,12 @@ spring:
         select * from commit where id = ?;
       get_commits_by_project_id:
         select * from commit where project_id = ?;
-
-  redis:
-    host: localhost
-    port: 6379
+    track:
+      get_tracks_by_commit_id:
+        select * from track where commit_id = ?
+    plugin:
+      get_plugins_by_track_id:
+        select * from plugin where track_id = ?
 
 # HotFix for displaying response examples when controller method returns ResponseEntity<Object>:
 # https://github.com/springfox/springfox/issues/3503

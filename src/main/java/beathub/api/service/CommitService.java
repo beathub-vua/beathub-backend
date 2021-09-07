@@ -18,7 +18,14 @@ public class CommitService {
     }
 
     public List<Commit> getCommitsByProjectId(Long projectId) {
-        return repository.getCommitsByProjectId(projectId);
+        List<Commit> commits = repository.getCommitsByProjectId(projectId);
+
+        commits.forEach(c ->
+        {
+            c.setTracks(repository.getTracksByCommitId(c.getId()));
+            c.getTracks().forEach(t -> t.setPlugins(repository.getPluginByTrackId(t.getId())));
+        });
+        return commits;
     }
 
     public Commit getCommitById(Long commitId) {

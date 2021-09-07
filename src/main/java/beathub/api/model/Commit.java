@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class Commit {
-    private Long commitId;
+    private Long id;
     private String projectName;
     private boolean isCurrent;
     private String filePath;
@@ -12,19 +12,19 @@ public class Commit {
     private List<Track> tracks;
 
     public Commit(Long commitId, String projectName, boolean isCurrent, String filePath, Timestamp dateTime) {
-        this.commitId = commitId;
+        this.id = commitId;
         this.projectName = projectName;
         this.isCurrent = isCurrent;
         this.filePath = filePath;
         this.dateTime = dateTime;
     }
 
-    public Long getCommitId() {
-        return commitId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCommitId(Long commitId) {
-        this.commitId = commitId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProjectName() {
