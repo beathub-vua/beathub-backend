@@ -1,21 +1,29 @@
 package beathub.api.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Commit {
-    private String commitId;
+    private Long commitId;
     private String projectName;
     private boolean isCurrent;
     private String filePath;
-    private LocalDateTime dateTime;
+    private Timestamp dateTime;
     private List<Track> tracks;
 
-    public String getCommitId() {
+    public Commit(Long commitId, String projectName, boolean isCurrent, String filePath, Timestamp dateTime) {
+        this.commitId = commitId;
+        this.projectName = projectName;
+        this.isCurrent = isCurrent;
+        this.filePath = filePath;
+        this.dateTime = dateTime;
+    }
+
+    public Long getCommitId() {
         return commitId;
     }
 
-    public void setCommitId(String commitId) {
+    public void setCommitId(Long commitId) {
         this.commitId = commitId;
     }
 
@@ -43,11 +51,11 @@ public class Commit {
         this.filePath = filePath;
     }
 
-    public LocalDateTime getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 

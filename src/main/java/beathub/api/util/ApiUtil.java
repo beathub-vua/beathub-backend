@@ -23,26 +23,4 @@ public class ApiUtil {
     public Predicate<String> getEmailPredicate() {
         return Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE).asMatchPredicate();
     }
-
-    @Bean
-    public RowMapper<Account> getAccountRowMapper() {
-        return (rs, rowNum) -> new Account(
-                rs.getLong("id"),
-                rs.getString("username"),
-                rs.getString("password"),
-                rs.getString("email"),
-                rs.getTimestamp("date_created"),
-                Role.values()[rs.getInt("role")]
-        );
-    }
-
-    @Bean(name = "withoutCommits")
-    public RowMapper<Project> getProjectRowMapper() {
-        return (rs, rowNum) -> new Project(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getString("description"),
-                rs.getTimestamp("date_created")
-        );
-    }
 }

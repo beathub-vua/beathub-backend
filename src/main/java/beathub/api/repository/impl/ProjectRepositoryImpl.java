@@ -19,6 +19,8 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
     @Value("${spring.sql.project.get_projects_by_account_id}")
     private String getProjectsByAccountIdSql;
+    @Value("${spring.sql.project.get_project_by_id}")
+    private String getProjectByIdSql;
 
     @Autowired
     public ProjectRepositoryImpl(@Qualifier("withoutCommits") RowMapper<Project> projectRowMapper, JdbcTemplate template) {
@@ -29,5 +31,10 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public List<Project> getProjectsByAccountId(Long accountId) {
         return template.query(getProjectsByAccountIdSql, projectRowMapper, accountId);
+    }
+
+    @Override
+    public Project getProjectById(Long projectId) {
+        return template.queryForObject(getProjectByIdSql, projectRowMapper, projectId);
     }
 }

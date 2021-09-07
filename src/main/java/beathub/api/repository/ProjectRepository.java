@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProjectRepository {
     List<Project> getProjectsByAccountId(Long accountId);
+
+    Project getProjectById(Long projectId);
 }

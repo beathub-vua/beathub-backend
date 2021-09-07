@@ -3,7 +3,6 @@ package beathub.api.repository.impl;
 import beathub.api.model.Account;
 import beathub.api.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
