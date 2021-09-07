@@ -18,4 +18,6 @@ public interface AccountRepository {
     List<Account> loadAccountByUsername(String username);
 
     int deleteAccount(Long accountId);
+
+    Account getAccountById(Long accountId);
 }

@@ -14,18 +14,24 @@ spring:
       password: 30ajOfYTatWY3izuPbDd
       maximum-pool-size: 5
   sql:
-    get_accounts:
-      select * from account;
-    get_account_by_username:
-      select * from account where username = ?;
-    get_accountId_by_username:
-      select id from account where username = ?;
-    get_accountId_by_email:
-      select id from account where email = ?;
-    register_account:
-      insert into account (username, password, email, date_created) values (?, ?, ?, ?);
-    delete_account:
-      delete from account where id = ?;
+    account:
+      get_accounts:
+        select * from account;
+      get_account_by_id:
+        select * from account where id = ?;
+      get_account_by_username:
+        select * from account where username = ?;
+      get_accountId_by_username:
+        select id from account where username = ?;
+      get_accountId_by_email:
+        select id from account where email = ?;
+      register_account:
+        insert into account (username, password, email, date_created) values (?, ?, ?, ?);
+      delete_account:
+        delete from account where id = ?;
+    project:
+      get_projects_by_account_id:
+        select * from project where account_id = ?;
   redis:
     host: localhost
     port: 6379

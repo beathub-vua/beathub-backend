@@ -17,24 +17,26 @@ import java.util.List;
 @Repository
 public class AccountRepositoryImpl implements AccountRepository {
 
-    @Value("${spring.sql.get_accounts}")
+    @Value("${spring.sql.account.get_accounts}")
     private String getAccountsSql;
-    @Value("${spring.sql.get_account_by_username}")
+    @Value("${spring.sql.account.get_account_by_id}")
+    private String getAccountByIdSql;
+    @Value("${spring.sql.account.get_account_by_username}")
     private String getAccountByUsernameSql;
-    @Value("${spring.sql.get_accountId_by_username}")
+    @Value("${spring.sql.account.get_accountId_by_username}")
     private String getAccountIdByUsernameSql;
-    @Value("${spring.sql.get_accountId_by_email}")
+    @Value("${spring.sql.account.get_accountId_by_email}")
     private String getAccountIdByEmailSql;
-    @Value("${spring.sql.register_account}")
+    @Value("${spring.sql.account.register_account}")
     private String registerUserSql;
-    @Value("${spring.sql.delete_account}")
+    @Value("${spring.sql.account.delete_account}")
     private String deleteAccountSql;
 
     private final JdbcTemplate template;
     private final RowMapper<Account> accountRowMapper;
 
     @Autowired
-    public AccountRepositoryImpl(JdbcTemplate template, @Qualifier("account") RowMapper<Account> accountRowMapper) {
+    public AccountRepositoryImpl(JdbcTemplate template, RowMapper<Account> accountRowMapper) {
         this.template = template;
         this.accountRowMapper = accountRowMapper;
     }
@@ -81,5 +83,10 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public int deleteAccount(Long accountId) {
         return template.update(deleteAccountSql, accountId);
+    }
+
+    @Override
+    public Account getAccountById(Long accountId) {
+        return template.queryForObject(getAccountByIdSql, accountRowMapper, accountId);
     }
 }

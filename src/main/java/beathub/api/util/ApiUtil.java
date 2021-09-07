@@ -1,6 +1,7 @@
 package beathub.api.util;
 
 import beathub.api.model.Account;
+import beathub.api.model.Project;
 import beathub.api.security.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ public class ApiUtil {
         return Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE).asMatchPredicate();
     }
 
-    @Bean(name = "account")
+    @Bean
     public RowMapper<Account> getAccountRowMapper() {
         return (rs, rowNum) -> new Account(
                 rs.getLong("id"),
@@ -32,6 +33,16 @@ public class ApiUtil {
                 rs.getString("email"),
                 rs.getTimestamp("date_created"),
                 Role.values()[rs.getInt("role")]
+        );
+    }
+
+    @Bean(name = "withoutCommits")
+    public RowMapper<Project> getProjectRowMapper() {
+        return (rs, rowNum) -> new Project(
+                rs.getLong("id"),
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getTimestamp("date_created")
         );
     }
 }

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -73,5 +74,14 @@ public class AccountService implements UserDetailsService {
 
     public boolean deleteAccount(Long accountId) {
         return repository.deleteAccount(accountId) == 1;
+    }
+
+    public boolean accountExists(Long accountId) {
+        try {
+            repository.getAccountById(accountId);
+            return true;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return false;
+        }
     }
 }

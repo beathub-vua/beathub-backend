@@ -7,6 +7,7 @@ public class Commit {
     private String commitId;
     private String projectName;
     private boolean isCurrent;
+    private String filePath;
     private LocalDateTime dateTime;
     private List<Track> tracks;
 
@@ -32,6 +33,14 @@ public class Commit {
 
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public LocalDateTime getDateTime() {
