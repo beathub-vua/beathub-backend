@@ -49,6 +49,7 @@ public class ProjectService {
             throw new NoSuchAccountException(accountId);
         }
         // Save project
+        project.setAccount(optAccount.get());
         Project newProject = jpaRepository.saveAndFlush(project);
         // Save to account
         optAccount.get().getProjects().add(newProject);
