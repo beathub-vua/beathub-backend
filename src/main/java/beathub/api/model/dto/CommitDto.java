@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CommitDto {
+    private Long id;
     private String projectName;
     private String filePath;
     private boolean isCurrent;
@@ -18,7 +19,13 @@ public class CommitDto {
     public CommitDto() {
     }
 
-    public CommitDto(String projectName, String filePath, boolean isCurrent, Timestamp dateTime, Set<Track> tracks) {
+    public CommitDto(Long id,
+                     String projectName,
+                     String filePath,
+                     boolean isCurrent,
+                     Timestamp dateTime,
+                     Set<Track> tracks) {
+        this.id = id;
         this.projectName = projectName;
         this.filePath = filePath;
         this.isCurrent = isCurrent;
@@ -27,7 +34,7 @@ public class CommitDto {
     }
 
     public static CommitDto from(Commit commit) {
-        CommitDto commitDto = new CommitDto(commit.getProjectName(), commit.getFilePath(), commit.isCurrent(), commit.getDateTime(), commit.getTracks());
+        CommitDto commitDto = new CommitDto(commit.getId(), commit.getProjectName(), commit.getFilePath(), commit.isCurrent(), commit.getDateTime(), commit.getTracks());
         commitDto.getTracks().forEach(t ->
         {
             t.setCommit(null);
@@ -88,5 +95,13 @@ public class CommitDto {
 
     public void setTracks(Set<Track> tracks) {
         this.tracks = tracks;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
