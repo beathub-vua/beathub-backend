@@ -52,6 +52,8 @@ public class ProjectController {
         Project project;
         try {
             logger.info("[START] Parsing commit and project from json to object");
+            logger.info(jsonProject);
+            logger.info(jsonCommit);
             commit = objectMapper.readValue(jsonCommit, Commit.class);
             project = objectMapper.readValue(jsonProject, Project.class);
             logger.info("[STOP] Parsing commit json to object");
