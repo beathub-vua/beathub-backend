@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDto {
+    private Long id;
     private String name;
     private String description;
     private Timestamp dateCreated;
@@ -14,7 +15,7 @@ public class ProjectDto {
     public static List<ProjectDto> fromList(List<Project> projects) {
         List<ProjectDto> projectDtos = new ArrayList<>();
         for (Project project : projects) {
-            projectDtos.add(new ProjectDto(project.getName(), project.getDescription(), project.getDateCreated()));
+            projectDtos.add(new ProjectDto(project.getId(), project.getName(), project.getDescription(), project.getDateCreated()));
         }
         return projectDtos;
     }
@@ -22,7 +23,8 @@ public class ProjectDto {
     public ProjectDto() {
     }
 
-    public ProjectDto(String name, String description, Timestamp dateCreated) {
+    public ProjectDto(Long id, String name, String description, Timestamp dateCreated) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.dateCreated = dateCreated;
@@ -50,5 +52,13 @@ public class ProjectDto {
 
     public void setDateCreated(Timestamp dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
