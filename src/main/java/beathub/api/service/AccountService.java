@@ -4,6 +4,7 @@ import beathub.api.exception.DuplicateEmailException;
 import beathub.api.exception.DuplicateUsernameException;
 import beathub.api.exception.InvalidEmailException;
 import beathub.api.model.Account;
+import beathub.api.repository.JpaAccountRepository;
 import beathub.api.repository.impl.AccountRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 @Service
@@ -24,18 +26,28 @@ public class AccountService implements UserDetailsService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final AccountRepositoryImpl repository;
+    private final JpaAccountRepository jpaAccountRepository;
     private final Predicate<String> emailPredicate;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AccountService(AccountRepositoryImpl repository, @Qualifier("email") Predicate<String> emailPredicate, PasswordEncoder passwordEncoder) {
+    public AccountService(AccountRepositoryImpl repository, JpaAccountRepository jpaAccountRepository, @Qualifier("email") Predicate<String> emailPredicate, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.jpaAccountRepository = jpaAccountRepository;
         this.emailPredicate = emailPredicate;
         this.passwordEncoder = passwordEncoder;
     }
 
     public List<Account> getAccounts() {
         return repository.getAccounts();
+    }
+
+    public Optional<Account> getAccountById(Long accountId) {
+        return jpaAccountRepository.findById(accountId);
+    }
+
+    public void saveAccount(Account account) {
+        jpaAccountRepository.saveAndFlush(account);
     }
 
     public void registerAccount(Account account) {

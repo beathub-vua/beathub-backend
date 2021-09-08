@@ -1,0 +1,306 @@
+{
+  "projectName": "asdasdsa",
+  "track": [
+    {
+      "trackName": "prva traka",
+      "trackRouteId": 168,
+      "channels": 2,
+      "audioFiles": [
+        {
+          "filePath": "E:\\OneDrive - Visoko uciliste Algebra\\B\\Docs\\Ardourž\\asdasdsa\\interchange\\asdasdsa\\audiofiles\\No Food%L.wav",
+          "id": 225
+        },
+        {
+          "filePath": "E:\\OneDrive - Visoko uciliste Algebra\\B\\Docs\\Ardourž\\asdasdsa\\interchange\\asdasdsa\\audiofiles\\No Food%R.wav",
+          "id": 227
+        }
+      ],
+      "plugins": [
+        {
+          "id": 1172,
+          "uniqueId": "5653544671456876616C68616C6C6166",
+          "routeId": 168,
+          "name": "ValhallaFreqEcho",
+          "parameters": [
+            {
+              "parameterNumber": 0,
+              "name": "wetDry",
+              "value": 0.5,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 1,
+              "name": "shift",
+              "value": 0.6521000266075134,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 2,
+              "name": "delay",
+              "value": 0.000990009866654873,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 3,
+              "name": "sync",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 4,
+              "name": "feedback",
+              "value": 0.2919999957084656,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 5,
+              "name": "lowCut",
+              "value": 0.06040268391370773,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 6,
+              "name": "highCut",
+              "value": 0.33110368251800537,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 7,
+              "name": "stereo",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 8,
+              "name": "Bypass",
+              "value": 0.0,
+              "calcValue": "0"
+            }
+          ],
+          "dllPath": ""
+        },
+        {
+          "id": 1193,
+          "uniqueId": "56535444433133646331613300000000",
+          "routeId": 168,
+          "name": "DC1A3",
+          "parameters": [
+            {
+              "parameterNumber": 0,
+              "name": "Input",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 1,
+              "name": "Output",
+              "value": 0.5900000333786011,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 2,
+              "name": "Deep",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 3,
+              "name": "Relaxed",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 4,
+              "name": "DualMono",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 5,
+              "name": "Negative",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 6,
+              "name": "Mix",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 7,
+              "name": "MeterType",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 8,
+              "name": "Bypass",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 9,
+              "name": "Bypass",
+              "value": 1.0,
+              "calcValue": "0"
+            }
+          ],
+          "dllPath": ""
+        },
+        {
+          "id": 1497,
+          "uniqueId": "56535441724E676E6120616E616C6F67",
+          "routeId": 168,
+          "name": "NA Analog Rack Noise Gate",
+          "parameters": [
+            {
+              "parameterNumber": 0,
+              "name": "Input Trimmer",
+              "value": 0.4300000071525574,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 1,
+              "name": "Output Trimmer",
+              "value": 0.3933333456516266,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 2,
+              "name": "Analog Power",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 3,
+              "name": "Threshold",
+              "value": 0.6833333373069763,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 4,
+              "name": "Range",
+              "value": 0.7900000214576721,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 5,
+              "name": "Power",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 6,
+              "name": "Bypass",
+              "value": 0.0,
+              "calcValue": "0"
+            }
+          ],
+          "dllPath": ""
+        }
+      ],
+      "playlist": {
+        "id": 207,
+        "region": {
+          "name": "No Food",
+          "audioSourceId": [
+            225,
+            227
+          ]
+        }
+      }
+    },
+    {
+      "trackName": "druga",
+      "trackRouteId": 1816,
+      "channels": 1,
+      "audioFiles": [
+        {
+          "filePath": "E:\\OneDrive - Visoko uciliste Algebra\\B\\Docs\\Ardourž\\asdasdsa\\interchange\\asdasdsa\\audiofiles\\Mirta.wav",
+          "id": 1879
+        }
+      ],
+      "plugins": [
+        {
+          "id": 2285,
+          "uniqueId": "56535444433133646331613300000000",
+          "routeId": 1816,
+          "name": "DC1A3",
+          "parameters": [
+            {
+              "parameterNumber": 0,
+              "name": "Input",
+              "value": 0.6875,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 1,
+              "name": "Output",
+              "value": 0.6899999976158142,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 2,
+              "name": "Deep",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 3,
+              "name": "Relaxed",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 4,
+              "name": "DualMono",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 5,
+              "name": "Negative",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 6,
+              "name": "Mix",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 7,
+              "name": "MeterType",
+              "value": 1.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 8,
+              "name": "Bypass",
+              "value": 0.0,
+              "calcValue": "0"
+            },
+            {
+              "parameterNumber": 9,
+              "name": "Bypass",
+              "value": 0.0,
+              "calcValue": "0"
+            }
+          ],
+          "dllPath": ""
+        }
+      ],
+      "playlist": {
+        "id": 1855,
+        "region": {
+          "name": "Mirta",
+          "audioSourceId": [
+            1879
+          ]
+        }
+      }
+    }
+  ]
+}

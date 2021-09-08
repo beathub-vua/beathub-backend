@@ -1,13 +1,52 @@
 package beathub.api.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.Set;
+
+@Entity
+@Table(name = "plugin")
 public class Plugin {
+    @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonAlias("id")
+    @Column(name = "code")
+    private Long code;
+    @Column(name = "unique_id")
     private String uniqueId;
+    @Column(name = "route_id")
     private int routeId;
+    @Column(name = "name")
     private String name;
-    private List<VstParameter> parameters;
+    @Column(name = "dll_path")
+    private String dllPath;
+    @OneToMany(mappedBy = "plugin", cascade = CascadeType.ALL)
+    private Set<VstParameter> parameters;
+    @ManyToOne
+    @JoinColumn(name = "track_id", referencedColumnName = "id")
+    private Track track;
+
+    public void addToVstParameters(Set<VstParameter> vstParameters) {
+        vstParameters.forEach(
+                p -> p.setPlugin(this)
+        );
+    }
+
+    public Plugin() {
+    }
 
     public Plugin(Long id, String name) {
         this.id = id;
@@ -46,11 +85,35 @@ public class Plugin {
         this.name = name;
     }
 
-    public List<VstParameter> getParameters() {
+    public Set<VstParameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(List<VstParameter> parameters) {
+    public void setParameters(Set<VstParameter> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getDllPath() {
+        return dllPath;
+    }
+
+    public void setDllPath(String dllPath) {
+        this.dllPath = dllPath;
+    }
+
+    public Track getTrack() {
+        return track;
+    }
+
+    public void setTrack(Track track) {
+        this.track = track;
+    }
+
+    public Long getCode() {
+        return code;
+    }
+
+    public void setCode(Long code) {
+        this.code = code;
     }
 }

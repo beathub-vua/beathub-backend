@@ -59,4 +59,9 @@ public class CommitRepositoryImpl implements CommitRepository {
     public List<Plugin> getPluginByTrackId(Long trackId) {
         return template.query(getPluginsByTrackIdSql, pluginRowMapper, trackId);
     }
+
+    @Override
+    public void saveCommit(Commit commit) {
+//        template.update();
+    }
 }

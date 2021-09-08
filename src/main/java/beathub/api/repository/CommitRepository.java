@@ -14,4 +14,6 @@ public interface CommitRepository {
     List<Track> getTracksByCommitId(Long commitId);
 
     List<Plugin> getPluginByTrackId(Long trackId);
+
+    void saveCommit(Commit commit);
 }

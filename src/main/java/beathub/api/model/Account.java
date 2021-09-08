@@ -5,20 +5,41 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name = "account")
 public class Account implements UserDetails {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
     private String email;
-    private Timestamp dateCreated;
+    @Column(name = "date_created")
+    private Timestamp dateCreated = Timestamp.from(Instant.now());
+    @Column(name = "role")
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private Set<Project> projects;
 
     public Account() {
     }
@@ -110,5 +131,13 @@ public class Account implements UserDetails {
     @Override
     public String toString() {
         return id.toString();
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }

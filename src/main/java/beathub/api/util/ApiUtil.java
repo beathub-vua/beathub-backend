@@ -3,6 +3,7 @@ package beathub.api.util;
 import beathub.api.model.Account;
 import beathub.api.model.Project;
 import beathub.api.security.Role;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,5 +23,10 @@ public class ApiUtil {
     @Bean(name = "email")
     public Predicate<String> getEmailPredicate() {
         return Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE).asMatchPredicate();
+    }
+
+    @Bean
+    public ObjectMapper getObjectMapper() {
+        return new ObjectMapper();
     }
 }
